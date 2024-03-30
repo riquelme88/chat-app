@@ -1,0 +1,21 @@
+{{>partials/header}}
+<title>Register Chat</title>
+
+ <section class="page registerPage">
+        <h1>Welcome</h1>
+        <img src="letra-r.png" alt="" class="logo">
+        <form action="" method = 'POST'>
+            <input type="text" class="name" placeholder="Name" name = 'name'>
+            <input type="text" class="email" placeholder="Email" name = 'email'>
+            <div class="form-pass">
+                <input type="password" class="password" placeholder="Password" name = 'password'>
+                <img src="olho.png" alt="">
+            </div>
+            {{#error}}
+                <span class = 'error'>{{error}}</span>
+            {{/error}}
+            <input type="submit" class="submit" value="Register">
+        </form>
+        <p>Have an account?<a href="/"> Login</a></p>
+    </section>
+    {{>partials/footer}}

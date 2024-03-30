@@ -1,0 +1,220 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #f2f2f2;
+    overflow: hidden;
+}
+
+.page{
+    flex-direction: column;
+    background-color: white;
+    padding: 30px 10px 20px 10px;
+    align-items: center;
+    width: 370px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px #bbb;
+}
+
+.page h1{
+    font-size: 30px;
+}
+
+.logo{
+    width: 100%;
+    height: 100%;
+    max-width: 50px;
+    margin-top: 20px;
+}
+
+.page form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.page form input{
+    margin-top: 35px;
+    width: 100vw;
+    max-width: 280px;
+}
+
+.password, .email, .name{
+    border: 0px;
+    border-bottom: 1px solid #999;
+    padding: 0px 0px 5px 10px;
+    outline: 0;
+}
+
+input[type = 'text']:focus, input[type = 'password']:focus{
+    border-bottom: 1px solid black;
+}
+
+.form-pass{
+    display: flex;
+    align-items: center;
+}
+.form-pass img{
+    width: 20px;
+    height: 20px;
+    margin-left: -25px;
+    margin-top: 30px;
+}
+
+
+.error{
+    color: red;
+    align-self: center;
+    margin-top: 10px;
+}
+.submit{
+    padding: 15px;
+    border-radius: 30px;
+    color: white;
+    border: 0px;
+    background: linear-gradient(to right, #00c9ff, #c21eff);
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.submit:hover{
+    background: linear-gradient(to right, #c21eff, #00c9ff);
+}
+
+.page p{
+    margin-top: 100px;
+    color: #666;
+}
+a{
+    text-decoration: none;
+    color: #111;
+    font-weight: 700;
+}
+
+.loginPage{
+    display:flex;
+}
+.registerPage{
+    display: flex;
+}
+
+/*//////////////////////////////////////////////////
+*/
+
+
+.mainChat{
+    display: flex;
+    height: 100vh;
+    background-color: white;
+}
+
+.usersOnline{
+    width: 22vw;
+    border: 1px solid #ccc;
+    height: 100vh;
+    padding: 15px 15px 0px 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.usersOnline form{
+    display: flex;
+}
+
+.usersOnline button{
+    width: 35px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.usersOnline button img{
+    width: 20px;
+    height: 20px;
+}
+
+.usersOnline input{
+    height: 30px;
+    margin-left: -1px;
+    padding: 0px 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.users{
+    margin-top: 20px;
+    list-style: none;
+    font-size: 18px;
+    overflow-y: auto;
+    padding: 0px 10px;
+}
+
+.users li{
+    margin-top: 10px;
+    background-color: #ddd;
+    padding: 10px;
+}
+
+.chat{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.user{
+    height: 70px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+    font-size: 20px;
+}
+
+.conversation{
+    flex: 1;
+    padding: 15px 15px 30px 15px; 
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.conversation input{
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 10px;
+    width: 75%;
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+    outline: 0;
+}
+
+.chatList{
+    list-style: none;
+}
+
+.conversation p{
+    margin-bottom: 5px;
+}
+
+.system-txt{
+    font-style: italic;
+    color: #888;
+}
+
+.m-txt{
+    font-weight: 700;
+}
+
+.m-txt span{
+    color: blue;
+}
+
+.msg-me span{
+    color: red;
+}
+
+
