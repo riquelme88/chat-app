@@ -28,13 +28,14 @@ export const login = async (req : Request, res : Response)=>{
     })
 
     if(user){
-        const token = generateToken({id : user.id});
+        const token = generateToken({id : user.id}); 
         console.log(token)
-        res.redirect('/chat')
+        res.json({status : true})
     }else{
-        res.render('pages/login', {
+        /*res.render('pages/login', {
             error : 'Email ou senha incorreto!'
-        })
+        })*/
+        res.json({status : false})
     }
 }
 
@@ -60,7 +61,7 @@ export const register = async (req: Request, res : Response)=>{
         if(user){
             if(email != '' && password != '' && name != ''){
                 await user.save()
-                const token = generateToken({id : user.id});
+                //const token = generateToken({id : user.id});
                 res.redirect('/login')
             }else{
                 console.log('Faltou informação')

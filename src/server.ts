@@ -80,7 +80,7 @@ const errorHandler : ErrorRequestHandler = (err, req, res, next)=>{
     }
 
     if(err.message){
-        console.log(`${err.message}`)
+        res.json({status : err.message})
     }else{
         console.log('aconteceu algum erro')
     }

@@ -4,7 +4,9 @@ import {Strategy as JWTStrategy, ExtractJwt} from 'passport-jwt'
 import { User } from "../model/userModel";
 import {Request, Response, NextFunction} from 'express'
 import jwt from 'jsonwebtoken'
+import { BasicStrategy } from "passport-http";
 
+// Passport Stategy = JWT
 
 dotenv.config()
 const notAthorizedJson = {status : 401, message : 'Não autorizado'};
@@ -36,3 +38,50 @@ export const generateToken = (data : object)=>{
 
 
 export default passport
+
+
+// Basci Strategy
+/*
+const notAthorizedJson = {status : 401, message : 'Não autorizado'}
+
+passport.use(new BasicStrategy( async (email,password,done)=>{
+    if(email && password){
+        const user = await User.findOne({where: {email,password}});
+        if(user){
+            return done(null,user)
+        }
+    }
+    return done(notAthorizedJson, false)
+}));
+
+export const privateRoute = (req : Request,res : Response,next : NextFunction)=>{
+    const authFunction = passport.authenticate('basic', (err : any ,user : any)=>{
+        return user ? next() : next(notAthorizedJson);
+    })
+    authFunction(req,res,next)
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
