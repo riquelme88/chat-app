@@ -33,7 +33,7 @@ export const login = async (req : Request, res : Response)=>{
         res.json({status : true})
     }else{
         /*res.render('pages/login', {
-            error : 'Email ou senha incorreto!'
+            error : 'Email ou senha incorreto!a'
         })*/
         res.json({status : false})
     }
