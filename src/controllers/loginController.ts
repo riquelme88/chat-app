@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { User, UserModel } from "../model/userModel";
-import { generateToken} from '../config/passport'
 import { where } from "sequelize";
+import { privateRoute } from "../config/passport";
+import { NextFunction } from "express-serve-static-core";
 
 
 export const redirect = (req: Request, res: Response)=>{
@@ -14,29 +15,22 @@ export const registerPage = (req: Request, res : Response) =>{
     res.render('pages/register')
 }
 
-/////////////////////////////
+export let hasUser : any = ''
 
-export const login = async (req : Request, res : Response)=>{
+export const login = async (req : Request, res : Response, next : NextFunction)=>{
     let email = req.body.email
     let password = req.body.password
+    let error = "Usuario está incorreto"
 
-    let user= await User.findOne({
+    hasUser = await User.findOne({
         where : {
             email,
             password
         }
     })
-
-    if(user){
-        const token = generateToken({id : user.id}); 
-        console.log(token)
-        res.json({status : true})
-    }else{
-        /*res.render('pages/login', {
-            error : 'Email ou senha incorreto!a'
-        })*/
-        res.json({status : false})
-    }
+    hasUser ? res.redirect('./chat') : res.render('pages/login', {
+        error
+    })
 }
 
 export const register = async (req: Request, res : Response)=>{

@@ -1,17 +1,12 @@
-import { User } from "../model/userModel";
-import {Request, Response, NextFunction} from 'express'
-import { hasUser } from "../controllers/loginController";
-
-const notAthorizedJson = {status : 401, message : 'Não autorizado'};
-
-export const privateRoute = (req: Request, res : Response, next : NextFunction)=>{
-    hasUser ? next() :  next(notAthorizedJson)
-}
-
-
-
-
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.privateRoute = void 0;
+const loginController_1 = require("../controllers/loginController");
+const notAthorizedJson = { status: 401, message: 'Não autorizado' };
+const privateRoute = (req, res, next) => {
+    loginController_1.hasUser ? next() : next(notAthorizedJson);
+};
+exports.privateRoute = privateRoute;
 /*import passport from "passport";
 import dotenv from 'dotenv'
 import {Strategy as JWTStrategy, ExtractJwt} from 'passport-jwt'
@@ -72,28 +67,3 @@ export const privateRoute = (req : Request,res : Response,next : NextFunction)=>
     })
     authFunction(req,res,next)
 }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
