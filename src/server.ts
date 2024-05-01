@@ -6,9 +6,11 @@ import mustache from 'mustache-express'
 import { Server } from 'socket.io';
 import http from 'http'
 import https from 'https'
-import { User } from './model/userModel'
+import { PrismaClient } from '@prisma/client'
 import passport from 'passport'
 import fs from 'fs'
+
+const prisma = new PrismaClient()
 
 const app = express()
 let io: any
@@ -56,7 +58,7 @@ io.on('connection', (socket: any) => {
 
     socket.on('join-request', async (username: any) => {
         socket.username = username
-        let user = await User.findOne({ where: { email: username } })
+        let user = await prisma.user.findFirst({ where: { email: username } })
         username = user?.name
         userOut = username
         connectedUsers.push(username)

@@ -1,68 +1,75 @@
 import { Request, Response } from "express";
-import { User, UserModel } from "../model/userModel";
-import { where } from "sequelize";
-import { privateRoute } from "../config/passport";
+import { PrismaClient } from "@prisma/client";
 import { NextFunction } from "express-serve-static-core";
+import bcrypt from 'bcrypt'
+
+const prisma = new PrismaClient()
 
 
-export const redirect = (req: Request, res: Response)=>{
+
+export const redirect = (req: Request, res: Response) => {
     res.redirect('/login')
 }
-export const loginPage = (req : Request, res : Response) =>{
+export const loginPage = (req: Request, res: Response) => {
     res.render('pages/login')
 }
-export const registerPage = (req: Request, res : Response) =>{
+export const registerPage = (req: Request, res: Response) => {
     res.render('pages/register')
 }
 
-export let hasUser : any = ''
+export let user: any = ''
 
-export const login = async (req : Request, res : Response, next : NextFunction)=>{
-    let email = req.body.email
-    let password = req.body.password
-    let error = "Usuario está incorreto"
+export const login = async (req: Request, res: Response, next: NextFunction) => {
+    const { email, password } = req.body
+    user = await prisma.user.findFirst({ where: { email } })
+    let error = 'Usuario não encontrado!'
 
-    hasUser = await User.findOne({
-        where : {
-            email,
-            password
-        }
-    })
-    hasUser ? res.redirect('./chat') : res.render('pages/login', {
-        error
-    })
+    if (!user) {
+        res.render('pages/login', {
+            error
+        })
+        return
+    }
+    const match = await bcrypt.compare(password, user?.password as string)
+    if (!match) {
+        error = 'Senha incorreta'
+        res.render('pages/login', {
+            error
+        })
+        return
+    }
+
+    res.redirect('/chat')
+    next()
 }
 
-export const register = async (req: Request, res : Response)=>{
-    let {email, password, name} = req.body
+export const register = async (req: Request, res: Response) => {
+    let { email, password, name } = req.body
 
-    let hasUser = await User.findOne({
-        where : {
-            email
+    let hasUser = await prisma.user.findFirst({ where: { email } })
+
+    if (hasUser) {
+        res.render('pages/register', {
+            error: "Email já existente!"
+        })
+        return
+    }
+
+    if (email === '' || password === '' || name === '') {
+        res.render('pages/register', {
+            error: 'Campo em falta'
+        })
+        return
+    }
+    const passwordHash = bcrypt.hash(password, 10)
+    const user = await prisma.user.create({
+        data: {
+            email,
+            password: (await passwordHash).toString(),
+            name
         }
     })
 
-    if(hasUser){
-        res.render('pages/register', {
-            error : "Email já existente!"
-        })
-    }else{
-        let user = await User.build({
-            email,
-            password,
-            name
-        })
-        if(user){
-            if(email != '' && password != '' && name != ''){
-                await user.save()
-                //const token = generateToken({id : user.id});
-                res.redirect('/login')
-            }else{
-                console.log('Faltou informação')
-                res.render('pages/register', {
-                    error : 'Está faltando informação!!'
-                })
-            }
-        }
-    }
+
+    res.redirect('/login')
 }

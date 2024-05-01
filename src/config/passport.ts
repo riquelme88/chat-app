@@ -1,11 +1,10 @@
-import { User } from "../model/userModel";
-import {Request, Response, NextFunction} from 'express'
-import { hasUser } from "../controllers/loginController";
+import { Request, Response, NextFunction } from 'express'
+import { user } from "../controllers/loginController";
 
-const notAthorizedJson = {status : 401, message : 'Não autorizado'};
+const notAthorizedJson = { status: 401, message: 'Não autorizado' };
 
-export const privateRoute = (req: Request, res : Response, next : NextFunction)=>{
-    hasUser ? next() :  next(notAthorizedJson)
+export const privateRoute = (req: Request, res: Response, next: NextFunction) => {
+    user ? next() : next(notAthorizedJson)
 }
 
 

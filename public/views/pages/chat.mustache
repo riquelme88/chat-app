@@ -1,0 +1,24 @@
+{{>partials/header}}
+    <section class="mainChat">
+        <div class="usersOnline">
+            <form action="">
+                <button><img src="lupa.png"></button>
+                <input type="text" placeholder="Search...">
+            </form>
+            <ul class="users">
+            </ul>
+        </div>
+        <div class="chat">
+            <div class="user">
+                <img src="" alt="" class="user-img">
+            </div>
+            <div class="conversation">
+                <ul class = chatList></ul>
+                <input type="text" class = 'chatInput' placeholder="Enter text here...">
+            </div>
+        </div>
+    </section>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src = '/js/chat.js'></script>
+</body>
+</html>
